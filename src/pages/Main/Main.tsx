@@ -1,6 +1,6 @@
-import {JSX} from "react"
-import Card from '../Card/Card.tsx'
-import { AmountPlaces } from '../Types/types.ts'
+import {JSX} from 'react';
+import Card from '../../component/Card/Card.tsx';
+import { AmountPlaces } from '../../component/Types/types.ts';
 
 function Main({amountPlacesRent}: AmountPlaces): JSX.Element {
   return (
@@ -107,7 +107,7 @@ function Main({amountPlacesRent}: AmountPlaces): JSX.Element {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;

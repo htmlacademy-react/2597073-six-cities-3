@@ -1,3 +1,3 @@
 export type AmountPlaces = {
-  amountPlacesRent: number,
+  amountPlacesRent: number;
 }

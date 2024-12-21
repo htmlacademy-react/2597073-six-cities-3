@@ -1,4 +1,4 @@
-import { JSX } from "react";
+import { JSX } from 'react';
 
 function Login(): JSX.Element {
   return (
@@ -41,7 +41,7 @@ function Login(): JSX.Element {
         </div>
       </main>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
