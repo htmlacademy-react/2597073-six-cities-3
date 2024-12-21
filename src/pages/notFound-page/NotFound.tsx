@@ -1,6 +1,6 @@
 import {JSX} from 'react';
 import {useNavigate} from 'react-router-dom';
-import style from './style/notfound.module.scss';
+import style from './style/notfound.module.css';
 
 function NotFound(): JSX.Element {
   const nav = useNavigate();
