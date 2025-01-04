@@ -1,4 +1,4 @@
-import Main from '../../pages/Main/Main';
+import Main from '../../pages/main-page/Main';
 import { AmountPlaces } from '../Types/types';
 
 function App({amountPlacesRent}: AmountPlaces) {
