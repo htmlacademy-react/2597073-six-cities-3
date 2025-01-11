@@ -49,20 +49,10 @@ function Favorites(): JSX.Element {
                   </div>
                 </div>
                 <div className="favorites__places">
-                  {CardDataFavorites.map(({id, title, isPremium, price, image, type, pageType, className, width, height, isFavorite}) => (
+                  {CardDataFavorites.map((offer) => (
                     <Card
-                      id={id}
-                      key={id}
-                      isPremium={isPremium}
-                      price={price}
-                      image={image}
-                      title={title}
-                      type={type}
-                      pageType={pageType}
-                      className={className}
-                      width={width}
-                      height={height}
-                      isFavorite={isFavorite}
+                      offer={offer}
+                      key={offer.id}
                     />
                   ))}
                 </div>

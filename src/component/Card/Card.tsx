@@ -4,16 +4,21 @@ import {CardProps} from '../../mocks/offer.ts';
 
 type TOfferCardProps = {
   offer: CardProps;
-  handleHover: (offer?: CardProps) => void;
+  handleHover?: (offer?: CardProps) => void;
 }
 
 function Card({offer, handleHover}: TOfferCardProps): JSX.Element {
+
   const handleMouseEnter = () => {
-    handleHover(offer);
+    if (handleHover) {
+      handleHover(offer);
+    }
   };
 
   const handleMouseLeave = () => {
-    handleHover();
+    if (handleHover) {
+      handleHover();
+    }
   };
 
   return (
