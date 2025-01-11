@@ -1,8 +1,11 @@
 import {JSX} from 'react';
-import Card from '../../component/Card/Card.tsx';
-import { AmountPlaces } from '../../component/Types/types.ts';
+import {AmountPlaces} from '../../component/Types/types.ts';
+import {RouterProps} from '../../component/Router/Router.tsx';
+import OffersList from '../../component/Offers-list/OffersList.tsx';
 
-function Main({amountPlacesRent}: AmountPlaces): JSX.Element {
+export type MainProps = AmountPlaces & RouterProps;
+
+function Main({CardDataCities, amountPlacesRent}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -73,37 +76,7 @@ function Main({amountPlacesRent}: AmountPlaces): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <div className="cities__places-container container">
-            <section className="cities__places places">
-              <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{amountPlacesRent} places to stay in Amsterdam</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width="7" height="4">
-                    <use xlinkHref="#icon-arrow-select"></use>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                  <li className="places__option" tabIndex={0}>Price: low to high</li>
-                  <li className="places__option" tabIndex={0}>Price: high to low</li>
-                  <li className="places__option" tabIndex={0}>Top rated first</li>
-                </ul>
-              </form>
-              <div className="cities__places-list places__list tabs__content">
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-                <Card/>
-              </div>
-            </section>
-            <div className="cities__right-section">
-              <section className="cities__map map"></section>
-            </div>
-          </div>
+          <OffersList CardDataCities={CardDataCities} amountPlacesRent={amountPlacesRent} />
         </div>
       </main>
     </div>

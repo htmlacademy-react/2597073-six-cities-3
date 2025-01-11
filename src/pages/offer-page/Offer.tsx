@@ -1,15 +1,58 @@
-import {JSX} from 'react';
+import {ChangeEventHandler, Fragment, JSX, useState} from 'react';
+import {Link, useParams} from 'react-router-dom';
+import {CardProps} from '../../mocks/offer.ts';
+import {RouterProps} from '../../component/Router/Router.tsx';
+import NotFound from '../not-found-page/NotFound.tsx';
 
-function Offer(): JSX.Element {
+const StarsData: Array<{title: string; value: number}> = [
+  {title: 'perfect', value: 5},
+  {title: 'good', value: 4},
+  {title: 'not bad', value: 3},
+  {title: 'badly', value: 2},
+  {title: 'terribly', value: 1},
+];
+
+type CommentsField = 'mark' | 'comment'
+let timer: NodeJS.Timeout;
+
+function Offer({CardDataCities}: RouterProps): JSX.Element {
+  const [commentData, setComment] = useState<Record<CommentsField, string | number>>({comment: '', mark: 0});
+
+  const { id } = useParams();
+  const currentOffer: CardProps | undefined = CardDataCities.find((offer: CardProps) => offer.id === Number(id));
+
+  if (!currentOffer) {
+    return <NotFound/>;
+  }
+  const {image, price, title: titleOffer, type: offerType, isFavorite, isPremium, bedRoomsCount, adultCount} = currentOffer;
+
+  const currentCountBedRooms = `${bedRoomsCount} ${bedRoomsCount > 1 ? 'Bedrooms' : 'Bedroom'}`;
+  const currentMaxAdults = `Max ${adultCount} ${adultCount > 1 ? 'adults' : 'adult'}`;
+
+  const getCommentHandler: (type: 'mark' | 'comment') => ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (type) => (event) => {
+    event.stopPropagation();
+
+    const {target: {value}} = event;
+
+    if (type === 'mark') {
+      setComment((state) => ({...state, [type]: Number(value)}));
+
+    }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      setComment((state) => ({...state, [type]: value}));
+    },800);
+  };
+
   return (
     <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <Link className="header__logo-link" to="/">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -36,36 +79,21 @@ function Offer(): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+              <img src={image} alt={titleOffer} />
             </div>
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium && (
+                <div className="offer__mark">
+                  <span>Premium</span>
+                </div>
+              )}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {titleOffer}
                 </h1>
-                <button className="offer__bookmark-button button" type="button">
+                <button className={`offer__bookmark-button ${isFavorite && 'offer__bookmark-button--active'} button`} type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
@@ -81,17 +109,17 @@ function Offer(): JSX.Element {
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {offerType}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {currentCountBedRooms}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  {currentMaxAdults}
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
@@ -187,52 +215,29 @@ function Offer(): JSX.Element {
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
-                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars"
-                      type="radio"
-                    />
-                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars"
-                      type="radio"
-                    />
-                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars"
-                      type="radio"
-                    />
-                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars"
-                      type="radio"
-                    />
-                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
-
-                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star"
-                      type="radio"
-                    />
-                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-                      <svg className="form__star-image" width="37" height="33">
-                        <use xlinkHref="#icon-star"></use>
-                      </svg>
-                    </label>
+                    {StarsData.map(({value, title}) => (
+                      <Fragment key={value}>
+                        <input className="form__rating-input visually-hidden" name="rating"
+                          defaultChecked={commentData.mark === value}
+                          value={value} id={`${value}-stars`}
+                          type="radio" onChange={getCommentHandler('mark')}
+                        />
+                        <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label"
+                          title={title}
+                        >
+                          <svg className="form__star-image" width="37" height="33">
+                            <use xlinkHref="#icon-star"></use>
+                          </svg>
+                        </label>
+                      </Fragment>
+                    ))}
                   </div>
-                  <textarea className="reviews__textarea form__textarea" id="review" name="review"
+                  <textarea
+                    onChange={getCommentHandler('comment')}
+                    defaultValue={commentData.comment}
+                    className="reviews__textarea form__textarea"
+                    id="review"
+                    name="review"
                     placeholder="Tell how was your stay, what you like and what can be improved"
                   >
                   </textarea>
@@ -241,7 +246,10 @@ function Offer(): JSX.Element {
                       To submit review please make sure to set <span className="reviews__star">rating</span> and
                       describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
                     </p>
-                    <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+                    <button className="reviews__submit form__submit button" type="submit"
+                      disabled={String(commentData.comment).length < 50 || !commentData.mark}
+                    >Submit
+                    </button>
                   </div>
                 </form>
               </section>
