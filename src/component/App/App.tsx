@@ -1,10 +1,8 @@
-import Main from '../../pages/main-page/Main';
-import { AmountPlaces } from '../Types/types';
+import Router from '../Router/Router.tsx';
+import {CardDataCities} from '../../mocks/offer.ts';
 
-function App({amountPlacesRent}: AmountPlaces) {
-  return (
-    <Main amountPlacesRent={amountPlacesRent}/>
-  );
+function App() {
+  return <Router CardDataCities={CardDataCities}/>;
 }
 
 export default App;

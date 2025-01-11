@@ -1,12 +1,12 @@
 import {Navigate} from 'react-router-dom';
-import {JSX} from 'react';
+import {ReactNode} from 'react';
 
 type PrivateRouteProp = {
-  children: JSX.Element;
+  children: ReactNode;
+  hasAccess?: boolean;
 }
 
-function PrivateRoutes({children}: PrivateRouteProp, hasAccess: boolean): JSX.Element {
-  hasAccess = false;
+function PrivateRoutes({children, hasAccess = true}: PrivateRouteProp): ReactNode {
   return hasAccess ? children : <Navigate to='/login'/>;
 }
 
