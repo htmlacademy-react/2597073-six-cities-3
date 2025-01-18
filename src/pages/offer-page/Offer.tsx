@@ -12,19 +12,23 @@ const StarsData: Array<{title: string; value: number}> = [
   {title: 'terribly', value: 1},
 ];
 
-type CommentsField = 'mark' | 'comment'
+type ReviewData = {
+  comment: string;
+  mark: number;
+}
+
 let timer: NodeJS.Timeout;
 
 function Offer({CardDataCities}: RouterProps): JSX.Element {
-  const [commentData, setComment] = useState<Record<CommentsField, string | number>>({comment: '', mark: 0});
+  const [commentData, setComment] = useState<ReviewData>({comment: '', mark: 0});
 
   const { id } = useParams();
-  const currentOffer: CardProps | undefined = CardDataCities.find((offer: CardProps) => offer.id === Number(id));
+  const currentOffer: CardProps | undefined = CardDataCities.find((offer: CardProps) => offer.id === id);
 
   if (!currentOffer) {
     return <NotFound/>;
   }
-  const {image, price, title: titleOffer, type: offerType, isFavorite, isPremium, bedRoomsCount, adultCount} = currentOffer;
+  const {previewImage, price, title: titleOffer, type: offerType, isFavorite, isPremium, bedRoomsCount, adultCount} = currentOffer;
 
   const currentCountBedRooms = `${bedRoomsCount} ${bedRoomsCount > 1 ? 'Bedrooms' : 'Bedroom'}`;
   const currentMaxAdults = `Max ${adultCount} ${adultCount > 1 ? 'adults' : 'adult'}`;
@@ -79,7 +83,7 @@ function Offer({CardDataCities}: RouterProps): JSX.Element {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <img src={image} alt={titleOffer} />
+              <img src={previewImage} alt={titleOffer} />
             </div>
           </div>
           <div className="offer__container container">
@@ -247,7 +251,7 @@ function Offer({CardDataCities}: RouterProps): JSX.Element {
                       describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
                     </p>
                     <button className="reviews__submit form__submit button" type="submit"
-                      disabled={String(commentData.comment).length < 50 || !commentData.mark}
+                      disabled={commentData.comment.length < 50 || !commentData.mark}
                     >Submit
                     </button>
                   </div>

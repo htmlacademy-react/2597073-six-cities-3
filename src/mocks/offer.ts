@@ -1,127 +1,241 @@
 
+type CardPropsTypes = 'apartment' | 'room';
+
 export type CardProps = {
-  id: number;
-  isPremium: boolean;
-  price: number;
-  image: string;
+  id: string;
   title: string;
-  type: string;
-  pageType: string;
-  className: string;
-  width: string;
-  height: string;
+  type: CardPropsTypes;
+  price: number;
+  city: {
+    name: string;
+    location: {
+      latitude: number;
+      longitude: number;
+      zoom: number;
+    };
+  };
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
   isFavorite: boolean;
+  isPremium: boolean;
+  rating: number;
+  width: string;
   bedRoomsCount: number;
   adultCount: number;
+  pageType: string;
+  className: string;
+  height: string;
+  previewImage: string;
 }
 
 export const CardDataCities: CardProps[] = [
   {
-    id: 1,
-    isPremium: true,
-    price: 120,
-    image: 'img/apartment-01.jpg',
+    id: '1',
     title: 'Beautiful & luxurious apartment at great location',
-    type: 'Apartment',
-    pageType: 'cities',
-    className: '',
-    width: '260',
-    height: '200',
+    type: 'apartment',
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
     isFavorite: true,
+    isPremium: true,
+    rating: 4.8,
+    width: '250',
     bedRoomsCount: 3,
     adultCount: 4,
-  },
-  {
-    id: 2,
-    isPremium: false,
-    price: 85,
-    image: 'img/room.jpg',
-    title: 'Cozy and affordable place',
-    type: 'Room',
     pageType: 'cities',
     className: '',
-    width: '260',
-    height: '200',
+    height: '110',
+    previewImage: 'img/apartment-01.jpg',
+  },
+  {
+    id: '2',
+    title: 'Cozy and affordable place',
+    type: 'room',
+    price: 85,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3609553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
     isFavorite: true,
+    isPremium: false,
+    rating: 4.2,
+    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
-  },
-  {
-    id: 3,
-    isPremium: false,
-    price: 150,
-    image: 'img/apartment-02.jpg',
-    title: 'Spacious 2-bedroom apartment',
-    type: 'Apartment',
     pageType: 'cities',
     className: '',
-    width: '260',
-    height: '200',
+    height: '110',
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '3',
+    title: 'Spacious 2-bedroom apartment',
+    type: 'apartment',
+    price: 150,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.929309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198,
+      zoom: 10,
+    },
     isFavorite: false,
+    isPremium: false,
+    rating: 4.7,
+    width: '250',
     bedRoomsCount: 4,
     adultCount: 5,
+    pageType: 'cities',
+    className: '',
+    height: '110',
+    previewImage: 'img/apartment-02.jpg',
   },
   {
-    id: 4,
-    isPremium: true,
-    price: 95,
-    image: 'img/apartment-03.jpg',
+    id: '4',
     title: 'Modern downtown studio',
-    type: 'Apartment',
-    pageType: 'cities',
-    className: '',
-    width: '260',
-    height: '200',
+    type: 'apartment',
+    price: 95,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3809553943508,
+        longitude: 4.939309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198,
+      zoom: 10,
+    },
     isFavorite: false,
+    isPremium: true,
+    rating: 4.6,
+    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
+    pageType: 'cities',
+    className: '',
+    height: '110',
+    previewImage: 'img/apartment-03.jpg',
   },
   {
-    id: 5,
-    isPremium: false,
-    price: 200,
-    image: 'img/room.jpg',
+    id: '5',
     title: 'Luxury penthouse with city view',
-    type: 'Room',
-    pageType: 'cities',
-    className: '',
-    width: '260',
-    height: '200',
+    type: 'room',
+    price: 200,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3859553943508,
+        longitude: 4.933309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3859553943508,
+      longitude: 4.933309666406198,
+      zoom: 10,
+    },
     isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
+    pageType: 'cities',
+    className: '',
+    height: '110',
+    previewImage: 'img/room.jpg',
   },
 ];
 
 export const CardDataFavorites: CardProps[] = [
   {
-    id: 1,
-    isPremium: true,
-    price: 180,
-    image: 'img/apartment-small-03.jpg',
-    title: 'Nice, cozy, warm big bed apartment',
-    type: 'Apartment',
-    pageType: 'favorites',
-    className: 'favorites__card-info',
-    width: '150',
-    height: '110',
+    id: '1',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'apartment',
+    price: 120,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
     isFavorite: true,
+    isPremium: true,
+    rating: 4.8,
+    width: '250',
     bedRoomsCount: 3,
     adultCount: 4,
-  },
-  {
-    id: 2,
-    isPremium: false,
-    price: 80,
-    image: 'img/room-small.jpg',
-    title: 'Wood and stone place',
-    type: 'Room',
     pageType: 'favorites',
     className: 'favorites__card-info',
-    width: '150',
     height: '110',
+    previewImage: 'img/room.jpg',
+  },
+  {
+    id: '2',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'apartment',
+    price: 85,
+    city: {
+      name: 'Amsterdam',
+      location: {
+        latitude: 52.3909553943508,
+        longitude: 4.85309666406198,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198,
+      zoom: 10,
+    },
     isFavorite: true,
-    bedRoomsCount: 4,
-    adultCount: 5,
+    isPremium: true,
+    rating: 4.8,
+    width: '250',
+    bedRoomsCount: 3,
+    adultCount: 4,
+    pageType: 'favorites',
+    className: 'favorites__card-info',
+    height: '110',
+    previewImage: 'img/apartment-01.jpg',
   },
 ];

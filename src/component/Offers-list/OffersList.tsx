@@ -1,11 +1,12 @@
 import {useState, JSX, FC} from 'react';
 import Card from '../Card/Card.tsx';
 import {MainProps} from '../../pages/main-page/Main.tsx';
-import {Nullable} from 'vitest';
-import {CardProps} from '../../mocks/offer.ts';
+import { CardProps} from '../../mocks/offer.ts';
+import Map from '../Map/Map.tsx';
+import {CITY} from '../../mocks/city.ts';
 
 const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Element => {
-  const [, setOfferIsActive] = useState<Nullable<CardProps>>(null);
+  const [offerIsActive, setOfferIsActive] = useState<CardProps | undefined>(undefined);
   const handleHover = (offer?: CardProps) => {
     setOfferIsActive(offer);
   };
@@ -35,7 +36,9 @@ const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Eleme
         </div>
       </section>
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+        <section className="cities__map map">
+          <Map points={CardDataCities} selectedPoint={offerIsActive} city={CITY}/>
+        </section>
       </div>
     </div>
   );

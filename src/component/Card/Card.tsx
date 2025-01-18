@@ -8,17 +8,12 @@ type TOfferCardProps = {
 }
 
 function Card({offer, handleHover}: TOfferCardProps): JSX.Element {
-
   const handleMouseEnter = () => {
-    if (handleHover) {
-      handleHover(offer);
-    }
+    handleHover?.(offer);
   };
 
   const handleMouseLeave = () => {
-    if (handleHover) {
-      handleHover();
-    }
+    handleHover?.();
   };
 
   return (
@@ -34,7 +29,7 @@ function Card({offer, handleHover}: TOfferCardProps): JSX.Element {
           </div>
         ) : null}
         <div className={`${offer.pageType}__image-wrapper place-card__image-wrapper`}>
-          <img className="place-card__image" src={offer.image} width={offer.width} height={offer.height}
+          <img className="place-card__image" src={offer.previewImage} width={offer.width} height={offer.height}
             alt="Place image"
           />
         </div>
