@@ -1,13 +1,11 @@
 import {JSX} from 'react';
 import { Link } from 'react-router-dom';
-import {CardProps} from '../../mocks/offer.ts';
+import {offerData, TOfferCardProps} from './types.ts';
 
-type TOfferCardProps = {
-  offer: CardProps;
-  handleHover?: (offer?: CardProps) => void;
-}
+function Card({offer, type, handleHover}: TOfferCardProps): JSX.Element {
+  const {width, height, className} = offerData[type];
+  const {pageType} = offer;
 
-function Card({offer, handleHover}: TOfferCardProps): JSX.Element {
   const handleMouseEnter = () => {
     handleHover?.(offer);
   };
@@ -22,18 +20,18 @@ function Card({offer, handleHover}: TOfferCardProps): JSX.Element {
       onMouseLeave={handleMouseLeave}
       to={`/offer/${offer.id}`}
     >
-      <article className={`${offer.pageType}__card place-card`}>
-        {offer.isPremium ? (
+      <article className={`${pageType}__card place-card`}>
+        {offer.isPremium && (
           <div className="place-card__mark">
             <span>Premium</span>
           </div>
-        ) : null}
-        <div className={`${offer.pageType}__image-wrapper place-card__image-wrapper`}>
-          <img className="place-card__image" src={offer.previewImage} width={offer.width} height={offer.height}
+        )}
+        <div className={`${pageType}__image-wrapper place-card__image-wrapper`}>
+          <img className="place-card__image" src={offer.previewImage} width={width} height={height}
             alt="Place image"
           />
         </div>
-        <div className={`${offer.className} place-card__info`}>
+        <div className={`${className} place-card__info`}>
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
               <b className="place-card__price-value">&euro;{offer.price}</b>

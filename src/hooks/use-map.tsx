@@ -4,19 +4,20 @@ import {City} from '../component/Types/types.ts';
 
 const UseMap = (
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: City
+  city: City,
+  zoom: number,
 ): Map | null => {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: city.lat,
           lng: city.lng
         },
-        zoom: 10
+        zoom
       });
 
       const layer = new TileLayer(
@@ -32,7 +33,7 @@ const UseMap = (
       setMap(instance);
       isRenderedRef.current = true;
     }
-  }, [mapRef, city]);
+  }, [mapRef, city, zoom]);
 
   return map;
 };

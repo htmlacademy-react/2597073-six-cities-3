@@ -4,12 +4,13 @@ import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
 import {City} from '../Types/types.ts';
-import {CardProps} from '../../mocks/offer.ts';
+import {TOffer} from '../../mocks/offer.ts';
 
 type MapProps = {
   city: City;
-  points: CardProps[];
-  selectedPoint: CardProps | undefined;
+  points: TOffer[];
+  zoom: number;
+  selectedPoint?: TOffer;
 };
 
 const defaultCustomIcon = new Icon({
@@ -25,10 +26,10 @@ const currentCustomIcon = new Icon({
 });
 
 const Map = (props: MapProps) => {
-  const {city, points, selectedPoint} = props;
+  const {city, points, selectedPoint, zoom} = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(mapRef, city, zoom);
 
   useEffect(() => {
     if (map) {
@@ -41,7 +42,7 @@ const Map = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPoint !== undefined && point.title === selectedPoint.title
+            selectedPoint && point.title === selectedPoint.title
               ? currentCustomIcon
               : defaultCustomIcon
           )
