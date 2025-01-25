@@ -1,7 +1,7 @@
 
 type CardPropsTypes = 'apartment' | 'room';
 
-export type CardProps = {
+export type TOffer = {
   id: string;
   title: string;
   type: CardPropsTypes;
@@ -22,16 +22,13 @@ export type CardProps = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  width: string;
   bedRoomsCount: number;
   adultCount: number;
   pageType: string;
-  className: string;
-  height: string;
   previewImage: string;
 }
 
-export const CardDataCities: CardProps[] = [
+export const CardDataCities: TOffer[] = [
   {
     id: '1',
     title: 'Beautiful & luxurious apartment at great location',
@@ -53,12 +50,9 @@ export const CardDataCities: CardProps[] = [
     isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    width: '250',
     bedRoomsCount: 3,
     adultCount: 4,
     pageType: 'cities',
-    className: '',
-    height: '110',
     previewImage: 'img/apartment-01.jpg',
   },
   {
@@ -82,12 +76,9 @@ export const CardDataCities: CardProps[] = [
     isFavorite: true,
     isPremium: false,
     rating: 4.2,
-    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
     pageType: 'cities',
-    className: '',
-    height: '110',
     previewImage: 'img/room.jpg',
   },
   {
@@ -111,12 +102,9 @@ export const CardDataCities: CardProps[] = [
     isFavorite: false,
     isPremium: false,
     rating: 4.7,
-    width: '250',
     bedRoomsCount: 4,
     adultCount: 5,
     pageType: 'cities',
-    className: '',
-    height: '110',
     previewImage: 'img/apartment-02.jpg',
   },
   {
@@ -140,12 +128,9 @@ export const CardDataCities: CardProps[] = [
     isFavorite: false,
     isPremium: true,
     rating: 4.6,
-    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
     pageType: 'cities',
-    className: '',
-    height: '110',
     previewImage: 'img/apartment-03.jpg',
   },
   {
@@ -169,17 +154,14 @@ export const CardDataCities: CardProps[] = [
     isFavorite: false,
     isPremium: false,
     rating: 5.0,
-    width: '250',
     bedRoomsCount: 2,
     adultCount: 3,
     pageType: 'cities',
-    className: '',
-    height: '110',
     previewImage: 'img/room.jpg',
   },
 ];
 
-export const CardDataFavorites: CardProps[] = [
+export const CardDataFavorites: TOffer[] = [
   {
     id: '1',
     title: 'Beautiful & luxurious apartment at great location',
@@ -201,12 +183,9 @@ export const CardDataFavorites: CardProps[] = [
     isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    width: '250',
     bedRoomsCount: 3,
     adultCount: 4,
     pageType: 'favorites',
-    className: 'favorites__card-info',
-    height: '110',
     previewImage: 'img/room.jpg',
   },
   {
@@ -230,12 +209,9 @@ export const CardDataFavorites: CardProps[] = [
     isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    width: '250',
     bedRoomsCount: 3,
     adultCount: 4,
     pageType: 'favorites',
-    className: 'favorites__card-info',
-    height: '110',
     previewImage: 'img/apartment-01.jpg',
   },
 ];

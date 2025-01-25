@@ -1,13 +1,14 @@
 import {useState, JSX, FC} from 'react';
 import Card from '../Card/Card.tsx';
 import {MainProps} from '../../pages/main-page/Main.tsx';
-import { CardProps} from '../../mocks/offer.ts';
+import { TOffer} from '../../mocks/offer.ts';
 import Map from '../Map/Map.tsx';
 import {CITY} from '../../mocks/city.ts';
+import {MAP_ZOOM_MAIN} from '../../consts.ts';
 
 const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Element => {
-  const [offerIsActive, setOfferIsActive] = useState<CardProps | undefined>(undefined);
-  const handleHover = (offer?: CardProps) => {
+  const [offerIsActive, setOfferIsActive] = useState<TOffer | undefined>(undefined);
+  const handleHover = (offer?: TOffer) => {
     setOfferIsActive(offer);
   };
 
@@ -32,12 +33,12 @@ const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Eleme
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {CardDataCities.map((offer) => <Card handleHover={handleHover} offer={offer} key={offer.id} />)}
+          {CardDataCities.map((offer) => <Card type="cities" handleHover={handleHover} offer={offer} key={offer.id} />)}
         </div>
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          <Map points={CardDataCities} selectedPoint={offerIsActive} city={CITY}/>
+          <Map zoom={MAP_ZOOM_MAIN} points={CardDataCities} selectedPoint={offerIsActive} city={CITY}/>
         </section>
       </div>
     </div>

@@ -51,6 +51,7 @@ function Favorites(): JSX.Element {
                 <div className="favorites__places">
                   {CardDataFavorites.map((offer) => (
                     <Card
+                      type="favorites"
                       offer={offer}
                       key={offer.id}
                     />
