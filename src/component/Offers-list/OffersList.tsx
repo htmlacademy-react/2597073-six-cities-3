@@ -1,13 +1,23 @@
 import {useState, JSX, FC} from 'react';
 import Card from '../Card/Card.tsx';
-import {MainProps} from '../../pages/main-page/Main.tsx';
-import { TOffer} from '../../mocks/offer.ts';
+import {TOffer} from '../../mocks/offer.ts';
 import Map from '../Map/Map.tsx';
-import {CITY} from '../../mocks/city.ts';
-import {MAP_ZOOM_MAIN} from '../../consts.ts';
+import {Cities, MAP_ZOOM_MAIN} from '../../consts.ts';
+import {CityName} from '../../mocks/city.ts';
+import NotFound from '../../pages/not-found-page/NotFound.tsx';
 
-const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Element => {
+type OfferListProps = {
+  currentOffers: TOffer[];
+  amountPlacesRent: number;
+  currentCity: CityName;
+}
+
+const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentCity}): JSX.Element => {
   const [offerIsActive, setOfferIsActive] = useState<TOffer | undefined>(undefined);
+  const currentMapCity = Cities.find((city) => city.name === currentCity);
+  if (!currentMapCity) {
+    return <NotFound/>;
+  }
   const handleHover = (offer?: TOffer) => {
     setOfferIsActive(offer);
   };
@@ -16,11 +26,11 @@ const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Eleme
     <div className="cities__places-container container">
       <section className="cities__places places">
         <h2 className="visually-hidden">Places</h2>
-        <b className="places__found">{amountPlacesRent} places to stay in Amsterdam</b>
+        <b className="places__found">{amountPlacesRent} place{amountPlacesRent > 1 && 's'} to stay in {currentCity}</b>
         <form className="places__sorting" action="#" method="get">
           <span className="places__sorting-caption">Sort by</span>
           <span className="places__sorting-type" tabIndex={0}>
-                  Popular
+            Popular
             <svg className="places__sorting-arrow" width="7" height="4">
               <use xlinkHref="#icon-arrow-select"></use>
             </svg>
@@ -33,12 +43,12 @@ const OffersList: FC<MainProps> = ({CardDataCities,amountPlacesRent}): JSX.Eleme
           </ul>
         </form>
         <div className="cities__places-list places__list tabs__content">
-          {CardDataCities.map((offer) => <Card type="cities" handleHover={handleHover} offer={offer} key={offer.id} />)}
+          {currentOffers.map((offer) => <Card type="cities" handleHover={handleHover} offer={offer} key={offer.id} />)}
         </div>
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          <Map zoom={MAP_ZOOM_MAIN} points={CardDataCities} selectedPoint={offerIsActive} city={CITY}/>
+          <Map zoom={MAP_ZOOM_MAIN} points={currentOffers} selectedPoint={offerIsActive} city={currentMapCity}/>
         </section>
       </div>
     </div>

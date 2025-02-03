@@ -42,7 +42,7 @@ const Map = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPoint && point.title === selectedPoint.title
+            selectedPoint && point.id === selectedPoint.id
               ? currentCustomIcon
               : defaultCustomIcon
           )
