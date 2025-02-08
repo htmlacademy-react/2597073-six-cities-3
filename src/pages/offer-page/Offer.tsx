@@ -1,23 +1,14 @@
 import {ChangeEventHandler, Fragment, JSX, useState} from 'react';
 import {Link, useParams} from 'react-router-dom';
 import {TOffer} from '../../mocks/offer.ts';
-import {RouterProps} from '../../component/Router/Router.tsx';
 import NotFound from '../not-found-page/NotFound.tsx';
 import ReviewsList from '../../component/Review-list/ReviewsList.tsx';
 import {Reviews} from '../../mocks/reviews.ts';
-import {CITY} from '../../mocks/city.ts';
 import Map from '../../component/Map/Map.tsx';
 import {getNearOffers} from './utils.ts';
 import Card from '../../component/Card/Card.tsx';
-import {MAP_ZOOM_OFFER} from '../../consts.ts';
-
-const StarsData: Array<{title: string; value: number}> = [
-  {title: 'perfect', value: 5},
-  {title: 'good', value: 4},
-  {title: 'not bad', value: 3},
-  {title: 'badly', value: 2},
-  {title: 'terribly', value: 1},
-];
+import {Cities, MAP_ZOOM_OFFER, StarsData} from '../../consts.ts';
+import {useAppSelector} from '../../hooks/store.ts';
 
 type ReviewData = {
   comment: string;
@@ -26,16 +17,23 @@ type ReviewData = {
 
 let timer: NodeJS.Timeout;
 
-function Offer({CardDataCities}: RouterProps): JSX.Element {
+function Offer(): JSX.Element {
   const [commentData, setComment] = useState<ReviewData>({comment: '', mark: 0});
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.city);
+  const currentOfferCity = Cities.find((city) => city.name === currentCity);
 
   const { id } = useParams();
-  const currentOffer: TOffer | undefined = CardDataCities.find((offer: TOffer) => offer.id === id);
+  const currentOffer: TOffer | undefined = offers.find((offer: TOffer) => offer.id === id);
 
-  if (!currentOffer) {
+  if (!currentOffer || !currentOfferCity) {
     return <NotFound/>;
   }
-  const {previewImage, price, title: titleOffer, type: offerType, isFavorite, isPremium, bedRoomsCount, adultCount} = currentOffer;
+  const {
+    previewImage, price, title: titleOffer,
+    type: offerType, isFavorite, isPremium,
+    bedRoomsCount, adultCount
+  } = currentOffer;
 
   const currentCountBedRooms = `${bedRoomsCount} ${bedRoomsCount > 1 ? 'Bedrooms' : 'Bedroom'}`;
   const currentMaxAdults = `Max ${adultCount} ${adultCount > 1 ? 'adults' : 'adult'}`;
@@ -56,6 +54,7 @@ function Offer({CardDataCities}: RouterProps): JSX.Element {
   };
 
   const nearOffers = getNearOffers(currentOffer);
+  const nearAndCurrentOffers = [...nearOffers, currentOffer];
 
   return (
     <div className="page">
@@ -242,7 +241,10 @@ function Offer({CardDataCities}: RouterProps): JSX.Element {
             </div>
           </div>
           <section className="offer__map map">
-            <Map zoom={MAP_ZOOM_OFFER} points={nearOffers} city={CITY}/>
+            <Map
+              zoom={MAP_ZOOM_OFFER} selectedPoint={currentOffer}
+              points={nearAndCurrentOffers} city={currentOfferCity}
+            />
           </section>
         </section>
         <div className="container">

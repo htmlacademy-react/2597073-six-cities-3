@@ -1,5 +1,9 @@
-
-type CardPropsTypes = 'apartment' | 'room';
+type CardPropsTypes = 'apartment' | 'room' | 'house';
+type CityLocation = {
+  latitude: number;
+  longitude: number;
+  zoom: number;
+}
 
 export type TOffer = {
   id: string;
@@ -8,17 +12,9 @@ export type TOffer = {
   price: number;
   city: {
     name: string;
-    location: {
-      latitude: number;
-      longitude: number;
-      zoom: number;
-    };
+    location: CityLocation;
   };
-  location: {
-    latitude: number;
-    longitude: number;
-    zoom: number;
-  };
+  location: CityLocation;
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
@@ -158,6 +154,396 @@ export const CardDataCities: TOffer[] = [
     adultCount: 3,
     pageType: 'cities',
     previewImage: 'img/room.jpg',
+  },
+  {
+    id: '6',
+    title: 'Perfectly located Castro',
+    type: 'room',
+    price: 223,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: true,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+  },
+  {
+    id: '7',
+    title: 'Loft Studio in the Central Area',
+    type: 'house',
+    price: 223,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+  },
+  {
+    id: '8',
+    title: 'Canal View Prinsengracht',
+    type: 'house',
+    price: 223,
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 48.834610000000005,
+      longitude: 2.335499,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+  },
+  {
+    id: '9',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'house',
+    price: 223,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.950361,
+      longitude: 6.961974,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+  },
+  {
+    id: '10',
+    title: 'Loft Studio in the Central Area',
+    type: 'apartment',
+    price: 369,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.932361,
+      longitude: 6.937974,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/14.jpg',
+  },
+  {
+    id: '11',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'apartment',
+    price: 121,
+    city: {
+      name: 'Cologne',
+      location: {
+        latitude: 50.938361,
+        longitude: 6.959974,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.938361,
+      longitude: 6.959974,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/1.jpg',
+  },
+  {
+    id: '12',
+    title: 'Perfectly located Castro',
+    type: 'apartment',
+    price: 498,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.854557,
+      longitude: 4.364697,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+  },
+  {
+    id: '13',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'room',
+    price: 256,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.867557,
+      longitude: 4.371696999999999,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/16.jpg',
+  },
+  {
+    id: '14',
+    title: 'Amazing and Extremely Central Flat',
+    type: 'room',
+    price: 256,
+    city: {
+      name: 'Brussels',
+      location: {
+        latitude: 50.846557,
+        longitude: 4.351697,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 50.827557 ,
+      longitude: 4.336697,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/3.jpg',
+  },
+  {
+    id: '15',
+    title: 'The house among olive',
+    type: 'room',
+    price: 137,
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 53.528341000000005 ,
+      longitude: 10.018654000000002,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/7.jpg',
+  },
+  {
+    id: '16',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'room',
+    price: 241,
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 53.538341 ,
+      longitude: 9.976654000000002,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+  },
+  {
+    id: '17',
+    title: 'The house among olive',
+    type: 'apartment',
+    price: 269,
+    city: {
+      name: 'Hamburg',
+      location: {
+        latitude: 53.550341,
+        longitude: 10.000654,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 53.563341 ,
+      longitude: 10.019654000000001,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/2.jpg',
+  },
+  {
+    id: '18',
+    title: 'House in countryside',
+    type: 'house',
+    price: 847,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 51.236402000000005 ,
+      longitude: 6.784314,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/8.jpg',
+  },
+  {
+    id: '19',
+    title: 'House in countryside',
+    type: 'house',
+    price: 847,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 51.210402 ,
+      longitude: 6.798314,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/13.jpg',
+  },
+  {
+    id: '20',
+    title: 'Waterfront with extraordinary view',
+    type: 'apartment',
+    price: 493,
+    city: {
+      name: 'Dusseldorf',
+      location: {
+        latitude: 51.225402,
+        longitude: 6.776314,
+        zoom: 10,
+      },
+    },
+    location: {
+      latitude: 51.211402 ,
+      longitude: 6.756314000000001,
+      zoom: 10,
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 5.0,
+    bedRoomsCount: 2,
+    adultCount: 3,
+    pageType: 'cities',
+    previewImage: 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
   },
 ];
 

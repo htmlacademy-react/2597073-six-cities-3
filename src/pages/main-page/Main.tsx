@@ -1,11 +1,13 @@
 import {JSX} from 'react';
-import {AmountPlaces} from '../../component/Types/types.ts';
-import {RouterProps} from '../../component/Router/Router.tsx';
 import OffersList from '../../component/Offers-list/OffersList.tsx';
+import CitiesList from '../../component/Cities-list/CitiesList.tsx';
+import {useAppSelector} from '../../hooks/store.ts';
 
-export type MainProps = AmountPlaces & RouterProps;
+function Main(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const currentCity = useAppSelector((state) => state.city);
+  const currentOffers = offers.filter((offer) => offer.city.name === currentCity);
 
-function Main({CardDataCities, amountPlacesRent}: MainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -41,42 +43,11 @@ function Main({CardDataCities, amountPlacesRent}: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList/>
           </section>
         </div>
         <div className="cities">
-          <OffersList CardDataCities={CardDataCities} amountPlacesRent={amountPlacesRent} />
+          <OffersList currentOffers={currentOffers} currentCity={currentCity} amountPlacesRent={currentOffers.length} />
         </div>
       </main>
     </div>

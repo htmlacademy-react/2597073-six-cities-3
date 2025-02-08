@@ -1,8 +1,3 @@
-import {City} from '../component/Types/types.ts';
+import {Cities} from '../consts.ts';
 
-export const CITY: City = {
-  title: 'Амстердам',
-  lat: 52.374,
-  lng: 4.88969,
-  zoom: 10
-};
+export type CityName = typeof Cities[number]['name'];
