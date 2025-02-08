@@ -16,3 +16,7 @@ export const getNearOffers = (offer: TOffer) => {
   }
   return nearOffers;
 };
+
+export const addPluralS =
+  (singularWord: string, pluralWord: string, pluralCount: number) =>
+    `${pluralCount} ${pluralCount > 1 ? pluralWord : singularWord}`;
