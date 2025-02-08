@@ -98,8 +98,8 @@ export const CardDataCities: TOffer[] = [
     isFavorite: false,
     isPremium: false,
     rating: 4.7,
-    bedRoomsCount: 4,
-    adultCount: 5,
+    bedRoomsCount: 2,
+    adultCount: 1,
     pageType: 'cities',
     previewImage: 'img/apartment-02.jpg',
   },
@@ -159,7 +159,7 @@ export const CardDataCities: TOffer[] = [
     id: '6',
     title: 'Perfectly located Castro',
     type: 'room',
-    price: 223,
+    price: 200,
     city: {
       name: 'Paris',
       location: {
@@ -175,7 +175,7 @@ export const CardDataCities: TOffer[] = [
     },
     isFavorite: false,
     isPremium: true,
-    rating: 5.0,
+    rating: 4.0,
     bedRoomsCount: 2,
     adultCount: 3,
     pageType: 'cities',
@@ -185,7 +185,7 @@ export const CardDataCities: TOffer[] = [
     id: '7',
     title: 'Loft Studio in the Central Area',
     type: 'house',
-    price: 223,
+    price: 150,
     city: {
       name: 'Paris',
       location: {
@@ -211,7 +211,7 @@ export const CardDataCities: TOffer[] = [
     id: '8',
     title: 'Canal View Prinsengracht',
     type: 'house',
-    price: 223,
+    price: 100,
     city: {
       name: 'Paris',
       location: {
@@ -227,7 +227,7 @@ export const CardDataCities: TOffer[] = [
     },
     isFavorite: false,
     isPremium: false,
-    rating: 5.0,
+    rating: 3.0,
     bedRoomsCount: 2,
     adultCount: 3,
     pageType: 'cities',

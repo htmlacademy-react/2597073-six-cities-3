@@ -5,7 +5,7 @@ import NotFound from '../not-found-page/NotFound.tsx';
 import ReviewsList from '../../component/Review-list/ReviewsList.tsx';
 import {Reviews} from '../../mocks/reviews.ts';
 import Map from '../../component/Map/Map.tsx';
-import {getNearOffers} from './utils.ts';
+import {getNearOffers, addPluralS} from './utils.ts';
 import Card from '../../component/Card/Card.tsx';
 import {Cities, MAP_ZOOM_OFFER, StarsData} from '../../consts.ts';
 import {useAppSelector} from '../../hooks/store.ts';
@@ -24,19 +24,24 @@ function Offer(): JSX.Element {
   const currentOfferCity = Cities.find((city) => city.name === currentCity);
 
   const { id } = useParams();
-  const currentOffer: TOffer | undefined = offers.find((offer: TOffer) => offer.id === id);
+  const currentOffer = offers.find((offer: TOffer) => offer.id === id);
 
   if (!currentOffer || !currentOfferCity) {
     return <NotFound/>;
   }
   const {
-    previewImage, price, title: titleOffer,
-    type: offerType, isFavorite, isPremium,
-    bedRoomsCount, adultCount
+    previewImage,
+    price,
+    title: titleOffer,
+    type: offerType,
+    isFavorite,
+    isPremium,
+    bedRoomsCount,
+    adultCount
   } = currentOffer;
 
-  const currentCountBedRooms = `${bedRoomsCount} ${bedRoomsCount > 1 ? 'Bedrooms' : 'Bedroom'}`;
-  const currentMaxAdults = `Max ${adultCount} ${adultCount > 1 ? 'adults' : 'adult'}`;
+  const currentCountBedRooms = addPluralS('Bedroom', 'Bedrooms', bedRoomsCount);
+  const currentMaxAdults = `Max ${addPluralS('adult', 'adults', adultCount)}`;
 
   const getCommentHandler: (type: 'mark' | 'comment') => ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (type) => (event) => {
     event.stopPropagation();
@@ -45,7 +50,6 @@ function Offer(): JSX.Element {
 
     if (type === 'mark') {
       setComment((state) => ({...state, [type]: Number(value)}));
-
     }
     clearTimeout(timer);
     timer = setTimeout(() => {
