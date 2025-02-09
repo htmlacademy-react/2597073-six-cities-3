@@ -57,7 +57,7 @@ function Offer(): JSX.Element {
     },800);
   };
 
-  const nearOffers = getNearOffers(currentOffer);
+  const nearOffers = getNearOffers(currentOffer, offers);
   const nearAndCurrentOffers = [...nearOffers, currentOffer];
 
   return (

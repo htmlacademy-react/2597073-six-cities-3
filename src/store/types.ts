@@ -5,6 +5,7 @@ import {TOffer} from '../mocks/offer.ts';
 export type TOffersState = {
   city: CityName;
   offers: TOffer[];
+  status: string;
 }
 
 export type AppDispatch = typeof store.dispatch;

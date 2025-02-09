@@ -1,5 +1,8 @@
 import {City} from './component/Types/types.ts';
 
+export const AXIOS_BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
+export const AXIOS_TIMEOUT = 5000;
+
 export const URL_MARKER_DEFAULT =
   'img/pin.svg';
 
@@ -21,7 +24,7 @@ export const StarsData: Array<{title: string; value: number}> = [
   {title: 'terribly', value: 1},
 ];
 
-export const MAP_ZOOM_MAIN = 12;
+export const MAP_ZOOM_MAIN = 13;
 export const MAP_ZOOM_OFFER = 13;
 
 export const Cities: City[] = [

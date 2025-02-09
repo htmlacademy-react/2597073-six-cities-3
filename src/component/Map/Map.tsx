@@ -5,12 +5,13 @@ import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
 import {City} from '../Types/types.ts';
 import {TOffer} from '../../mocks/offer.ts';
+import {Nullable} from 'vitest';
 
 type MapProps = {
   city: City;
   points: TOffer[];
   zoom: number;
-  selectedPoint?: TOffer;
+  selectedPoint: Nullable<TOffer>;
 };
 
 const defaultCustomIcon = new Icon({

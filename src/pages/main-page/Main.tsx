@@ -1,9 +1,16 @@
-import {JSX} from 'react';
+import {JSX, useEffect} from 'react';
 import OffersList from '../../component/Offers-list/OffersList.tsx';
 import CitiesList from '../../component/Cities-list/CitiesList.tsx';
-import {useAppSelector} from '../../hooks/store.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
+import {fetchAllOffers} from '../../axios/api-actions.ts';
 
 function Main(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchAllOffers());
+  }, [dispatch]);
+
   const offers = useAppSelector((state) => state.offers);
   const currentCity = useAppSelector((state) => state.city);
   const currentOffers = offers.filter((offer) => offer.city.name === currentCity);

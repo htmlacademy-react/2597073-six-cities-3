@@ -20,7 +20,7 @@ const SortingOptions = ({optionsForm, setOptionsForm}: TSortOptionsProps) => {
 
   return (
     <form onClick={handleToggle} className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by&nbsp;</span>
       <span className="places__sorting-type" tabIndex={0}>
         {selectedOption}
         <svg className="places__sorting-arrow" width="7" height="4">
