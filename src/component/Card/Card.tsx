@@ -4,7 +4,6 @@ import {offerData, TOfferCardProps} from './types.ts';
 
 function Card({offer, type, handleHover}: TOfferCardProps): JSX.Element {
   const {width, height, className} = offerData[type];
-  const {pageType} = offer;
 
   const handleMouseEnter = () => {
     handleHover?.(offer);
@@ -20,13 +19,13 @@ function Card({offer, type, handleHover}: TOfferCardProps): JSX.Element {
       onMouseLeave={handleMouseLeave}
       to={`/offer/${offer.id}`}
     >
-      <article className={`${pageType}__card place-card`}>
+      <article className={'cities__card place-card'}>
         {offer.isPremium && (
           <div className="place-card__mark">
             <span>Premium</span>
           </div>
         )}
-        <div className={`${pageType}__image-wrapper place-card__image-wrapper`}>
+        <div className={'cities__image-wrapper place-card__image-wrapper'}>
           <img className="place-card__image" src={offer.previewImage} width={width} height={height}
             alt="Place image"
           />
