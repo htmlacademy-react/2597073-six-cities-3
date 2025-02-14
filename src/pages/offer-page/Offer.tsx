@@ -1,5 +1,5 @@
 import {ChangeEventHandler, Fragment, JSX, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {TOffer} from '../../mocks/offer.ts';
 import NotFound from '../not-found-page/NotFound.tsx';
 import ReviewsList from '../../component/Review-list/ReviewsList.tsx';
@@ -9,6 +9,7 @@ import {getNearOffers, addPluralS} from './utils.ts';
 import Card from '../../component/Card/Card.tsx';
 import {Cities, MAP_ZOOM_OFFER, StarsData} from '../../consts.ts';
 import {useAppSelector} from '../../hooks/store.ts';
+import Header from '../../component/Header/Header.tsx';
 
 type ReviewData = {
   comment: string;
@@ -19,8 +20,8 @@ let timer: NodeJS.Timeout;
 
 function Offer(): JSX.Element {
   const [commentData, setComment] = useState<ReviewData>({comment: '', mark: 0});
-  const offers = useAppSelector((state) => state.offers);
-  const currentCity = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers.offers);
+  const currentCity = useAppSelector((state) => state.offers.city);
   const currentOfferCity = Cities.find((city) => city.name === currentCity);
 
   const { id } = useParams();
@@ -62,34 +63,7 @@ function Offer(): JSX.Element {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
 
       <main className="page__main page__main--offer">
         <section className="offer">

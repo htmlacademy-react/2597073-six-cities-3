@@ -14,7 +14,7 @@ import {fetchOffersStatus} from '../../store/slices/offers.ts';
 const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentCity}): JSX.Element => {
   const [offerIsActive, setOfferIsActive] = useState<Nullable<TOffer>>(null);
   const [optionsForm, setOptionsForm] = useState<TSortOptions>({formToggle: false, selectedOption: 'Popular'});
-  const loadingOffersStatus = useAppSelector((state) => state.status);
+  const loadingOffersStatus = useAppSelector((state) => state.offers.status);
 
   const currentMapCity = Cities.find((city) => city.name === currentCity) || Cities[0];
 
@@ -24,7 +24,7 @@ const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentC
 
   const sortOffers = sortingOffers(currentOffers, optionsForm.selectedOption);
 
-  if (loadingOffersStatus === fetchOffersStatus.Pending) {
+  if (loadingOffersStatus === fetchOffersStatus.Loading) {
     return <Loader/>;
   }
 
