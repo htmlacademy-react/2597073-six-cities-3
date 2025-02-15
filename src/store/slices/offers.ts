@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TOffersState} from '../types.ts';
 import {Cities} from '../../consts.ts';
 import {CityName} from '../../mocks/city.ts';
-import {fetchAllOffers} from '../../axios/api-actions.ts';
+import {fetchAllOffers} from '../thunk/offers.ts';
 
 const initialState: TOffersState = {
   city: Cities[0].name,
@@ -11,9 +11,9 @@ const initialState: TOffersState = {
 };
 
 export const fetchOffersStatus = {
-  Pending: 'Загрузка...',
-  Fulfilled: 'Загружено.',
-  Rejected: 'Отказано.',
+  Loading: 'loading...',
+  Done: 'Done.',
+  Error: 'Error.',
 };
 
 const offersSlice = createSlice({
@@ -27,14 +27,14 @@ const offersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllOffers.pending, (state) => {
-        state.status = fetchOffersStatus.Pending;
+        state.status = fetchOffersStatus.Loading;
       })
       .addCase(fetchAllOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
-        state.status = fetchOffersStatus.Fulfilled;
+        state.status = fetchOffersStatus.Done;
       })
       .addCase(fetchAllOffers.rejected, (state) => {
-        state.status = fetchOffersStatus.Rejected;
+        state.status = fetchOffersStatus.Error;
       });
   },
 });

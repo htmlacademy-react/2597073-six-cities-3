@@ -6,6 +6,11 @@ export const AXIOS_TIMEOUT = 5000;
 export const URL_MARKER_DEFAULT =
   'img/pin.svg';
 
+export const AuthorizationStatus = {
+  Auth: 'Auth',
+  NoAuth: 'NoAuth'
+} as const;
+
 export const URL_MARKER_CURRENT =
   'img/pin-active.svg';
 

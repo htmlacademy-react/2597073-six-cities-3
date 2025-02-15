@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {offersAction} from '../../store/slices/offers.ts';
 
 const CitiesList = () => {
-  const currentCity = useAppSelector((state) => state.city);
+  const currentCity = useAppSelector((state) => state.offers.city);
   const dispatch = useAppDispatch();
 
   return (
