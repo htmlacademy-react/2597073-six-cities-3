@@ -3,9 +3,9 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
-import {City} from '../Types/types.ts';
 import {TOffer} from '../../mocks/offer.ts';
 import {Nullable} from 'vitest';
+import {City} from '../Types/types.ts';
 
 type MapProps = {
   city: City;

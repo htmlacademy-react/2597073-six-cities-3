@@ -11,7 +11,7 @@ const initialState: TOffersState = {
 };
 
 export const fetchOffersStatus = {
-  Loading: 'loading...',
+  Loading: 'Loading...',
   Done: 'Done.',
   Error: 'Error.',
 };

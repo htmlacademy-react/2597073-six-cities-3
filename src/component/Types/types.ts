@@ -3,7 +3,6 @@ export type AmountPlaces = {
 }
 
 export type City = {
-  id: string;
   location: { latitude: number; longitude: number; zoom: number };
   name: string;
 };
