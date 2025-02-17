@@ -6,7 +6,7 @@ export const getNearOffers = (offer: TOffer, offers: TOffer[]) => {
   const nearOffers = [];
 
   for (let i = 0; i < offers.length; i++) {
-    if (offers[i].id !== offer.id && offers[i].city.name === offer.city.name) {
+    if (offers[i].id !== offer.id) {
       nearOffers.push(offers[i]);
     }
 
