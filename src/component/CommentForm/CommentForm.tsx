@@ -1,13 +1,9 @@
-import {ChangeEventHandler, FormEvent, useEffect, useState} from 'react';
+import {ChangeEventHandler, FormEvent, useCallback, useEffect, useState} from 'react';
 import CommentFormStars from '../CommentFormStars/CommentFormStars.tsx';
 import {PostReviewStatus} from '../../store/types.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {selectPostCommentStatus} from '../../store/selectors/commentsSelector.ts';
 import {postComment} from '../../store/thunk/comments.ts';
-
-export type TCommentFormProps = {
-  offerId: string;
-}
 
 export type ReviewData = {
   comment: string;
@@ -19,7 +15,7 @@ const commentInitialState = {
   rating: 0,
 };
 
-const CommentForm = ({offerId}: TCommentFormProps) => {
+const CommentForm = ({offerId}: {offerId: string}) => {
   const [commentData, setComment] = useState<ReviewData>(commentInitialState);
   const reviewPostStatus = useAppSelector(selectPostCommentStatus);
   const dispatch = useAppDispatch();
@@ -35,20 +31,20 @@ const CommentForm = ({offerId}: TCommentFormProps) => {
     dispatch(postComment({ body: commentData, offerId }));
   };
 
-  const getCommentHandler: (type: 'rating' | 'comment') => ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = (type) => (event) => {
+  const getCommentHandler: (type: 'rating' | 'comment') => ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement> = useCallback((type) => (event) => {
     event.stopPropagation();
 
     const {target: {value}} = event;
 
     setComment((state) => ({...state, [type]: type === 'rating' ? Number(value) : value}));
-  };
+  },[]);
 
   return (
     <form onSubmit={(e) => postCommentByUser(e)} className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         <CommentFormStars
-          commentData={commentData}
+          rating={commentData.rating}
           getCommentHandler={getCommentHandler}
         />
       </div>

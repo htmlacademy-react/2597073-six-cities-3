@@ -1,4 +1,4 @@
-import {useState, JSX, FC} from 'react';
+import {useState, JSX, FC, useCallback} from 'react';
 import Card from '../Card/Card.tsx';
 import {TOffer} from '../../mocks/offer.ts';
 import Map from '../Map/Map.tsx';
@@ -10,17 +10,18 @@ import Loader from '../Loader/Loader.tsx';
 import {Nullable} from 'vitest';
 import {useAppSelector} from '../../hooks/store.ts';
 import {fetchOffersStatus} from '../../store/slices/offers.ts';
+import {selectMemoStatus} from '../../store/selectors/offersSelectors.ts';
 
 const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentCity}): JSX.Element => {
-  const [offerIsActive, setOfferIsActive] = useState<Nullable<TOffer>>(null);
+  const [offerIsActive, setOfferIsActive] = useState<Nullable<TOffer['id']>>(null);
   const [optionsForm, setOptionsForm] = useState<TSortOptions>({formToggle: false, selectedOption: 'Popular'});
-  const loadingOffersStatus = useAppSelector((state) => state.offers.status);
+  const loadingOffersStatus = useAppSelector(selectMemoStatus);
 
   const currentMapCity = Cities.find((city) => city.name === currentCity) || Cities[0];
 
-  const handleHover = (offer: Nullable<TOffer>) => {
-    setOfferIsActive(offer);
-  };
+  const handleHover = useCallback((offerId: Nullable<TOffer['id']>) => {
+    setOfferIsActive(offerId);
+  },[]);
 
   const sortOffers = sortingOffers(currentOffers, optionsForm.selectedOption);
 
@@ -40,7 +41,7 @@ const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentC
       </section>
       <div className="cities__right-section">
         <section className="cities__map map">
-          <Map zoom={MAP_ZOOM_MAIN} points={currentOffers} selectedPoint={offerIsActive} city={currentMapCity}/>
+          <Map zoom={MAP_ZOOM_MAIN} points={currentOffers} selectedPointId={offerIsActive} city={currentMapCity}/>
         </section>
       </div>
     </div>

@@ -14,5 +14,5 @@ export const offerData: TOfferData = {
 export type TOfferCardProps = {
   offer: TOffer;
   type: TOfferType;
-  handleHover?: (offer?: TOffer) => void;
+  handleHover?: (offerId?: TOffer['id']) => void;
 }
