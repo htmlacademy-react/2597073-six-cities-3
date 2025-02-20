@@ -1,5 +1,4 @@
 import {FormEvent, JSX, useState} from 'react';
-import {Link} from 'react-router-dom';
 import {TLoginData} from '../../store/types.ts';
 import {useAppDispatch} from '../../hooks/store.ts';
 import {login} from '../../store/thunk/user.ts';
@@ -19,18 +18,6 @@ function Login(): JSX.Element {
 
   return (
     <div className="page page--gray page--login">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to="/">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -39,24 +26,24 @@ function Login(): JSX.Element {
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">E-mail</label>
                 <input
-                  onChange={(e) =>
-                    handleInputChange('email', e.target.value)}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
                   className="login__input form__input"
                   type="email"
                   name="email"
                   placeholder="Email"
+                  pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                   required
                 />
               </div>
               <div className="login__input-wrapper form__input-wrapper">
                 <label className="visually-hidden">Password</label>
                 <input
-                  onChange={(e) =>
-                    handleInputChange('password', e.target.value)}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
                   className="login__input form__input"
                   type="password"
                   name="password"
                   placeholder="Password"
+                  pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}"
                   required
                 />
               </div>

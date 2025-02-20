@@ -1,5 +1,5 @@
 import {TSortOptions} from '../Offers-list/types.ts';
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {Dispatch, memo, SetStateAction} from 'react';
 import {SORTING_OPTIONS} from '../../consts.ts';
 
 type TSortOptionsProps = {
@@ -43,4 +43,5 @@ const SortingOptions = ({optionsForm, setOptionsForm}: TSortOptionsProps) => {
   );
 };
 
-export default SortingOptions;
+const memoSorting = memo(SortingOptions);
+export default memoSorting;

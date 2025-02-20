@@ -2,13 +2,10 @@ import {JSX} from 'react';
 import Card from '../../component/Card/Card.tsx';
 import {CardDataFavorites} from '../../mocks/offer.ts';
 import {Link} from 'react-router-dom';
-import Header from '../../component/Header/Header.tsx';
 
 function Favorites(): JSX.Element {
   return (
     <div className="page">
-      <Header/>
-
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

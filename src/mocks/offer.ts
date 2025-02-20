@@ -1,8 +1,21 @@
 type CardPropsTypes = 'apartment' | 'room' | 'house';
-type CityLocation = {
+export type CityLocation = {
   latitude: number;
   longitude: number;
   zoom: number;
+}
+
+export type OfferHost = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
+export type TFullOffer = TOffer & {
+  description: string;
+  goods: [string];
+  host: OfferHost;
+  images: [string];
 }
 
 export type TOffer = {
@@ -18,8 +31,8 @@ export type TOffer = {
   isFavorite: boolean;
   isPremium: boolean;
   rating: number;
-  bedRoomsCount: number;
-  adultCount: number;
+  bedrooms: number;
+  maxAdults: number;
   //pageType: string;
   previewImage: string;
 }
@@ -46,8 +59,8 @@ export const CardDataFavorites: TOffer[] = [
     isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    bedRoomsCount: 3,
-    adultCount: 4,
+    bedrooms: 3,
+    maxAdults: 4,
     previewImage: 'img/room.jpg',
   },
   {
@@ -71,8 +84,8 @@ export const CardDataFavorites: TOffer[] = [
     isFavorite: true,
     isPremium: true,
     rating: 4.8,
-    bedRoomsCount: 3,
-    adultCount: 4,
+    bedrooms: 3,
+    maxAdults: 4,
     previewImage: 'img/apartment-01.jpg',
   },
 ];
