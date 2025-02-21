@@ -1,4 +1,4 @@
-import {TOffer} from '../../mocks/offer.ts';
+import {TOffer} from '../Types/types.ts';
 
 export const sortingOffers = (currentOffers: TOffer[], selectedOption: string): TOffer[] => {
   switch (selectedOption) {

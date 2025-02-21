@@ -1,33 +1,20 @@
-import {useEffect, useRef} from 'react';
-import {Icon, Marker, layerGroup} from 'leaflet';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../consts.ts';
+import {memo, useEffect, useRef} from 'react';
+import {Marker, layerGroup} from 'leaflet';
+import {currentCustomIcon, defaultCustomIcon} from '../../consts.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
-import {City} from '../Types/types.ts';
-import {TOffer} from '../../mocks/offer.ts';
 import {Nullable} from 'vitest';
+import {City, TOffer} from '../Types/types.ts';
 
 type MapProps = {
   city: City;
   points: TOffer[];
   zoom: number;
-  selectedPoint: Nullable<TOffer>;
+  selectedPointId: Nullable<TOffer['id']>;
 };
 
-const defaultCustomIcon = new Icon({
-  iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
-const currentCustomIcon = new Icon({
-  iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
-});
-
 const Map = (props: MapProps) => {
-  const {city, points, selectedPoint, zoom} = props;
+  const {city, points, selectedPointId, zoom} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city, zoom);
@@ -43,7 +30,7 @@ const Map = (props: MapProps) => {
 
         marker
           .setIcon(
-            selectedPoint && point.id === selectedPoint.id
+            selectedPointId && point.id === selectedPointId
               ? currentCustomIcon
               : defaultCustomIcon
           )
@@ -54,9 +41,9 @@ const Map = (props: MapProps) => {
         map.removeLayer(markerLayer);
       };
     }
-  }, [map, points, selectedPoint]);
+  }, [map, points, selectedPointId]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 };
 
-export default Map;
+export default memo(Map);

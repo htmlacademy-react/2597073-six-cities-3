@@ -1,4 +1,5 @@
 import {City} from './component/Types/types.ts';
+import {Icon} from 'leaflet';
 
 export const AXIOS_BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
 export const AXIOS_TIMEOUT = 5000;
@@ -6,10 +7,13 @@ export const AXIOS_TIMEOUT = 5000;
 export const URL_MARKER_DEFAULT =
   'img/pin.svg';
 
-export const AuthorizationStatus = {
-  Auth: 'Auth',
-  NoAuth: 'NoAuth'
-} as const;
+export enum AuthorizationStatus {
+  Auth = 'Auth',
+  NoAuth = 'NoAuth',
+  Unknown = 'Unknown',
+}
+
+export const MAX_COUNT_NEARBY_OFFERS = 3;
 
 export const URL_MARKER_CURRENT =
   'img/pin-active.svg';
@@ -20,6 +24,18 @@ export const SORTING_OPTIONS = [
   'Price: high to low',
   'Top rated first',
 ];
+
+export const defaultCustomIcon = new Icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+export const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
 
 export const StarsData: Array<{title: string; value: number}> = [
   {title: 'perfect', value: 5},
@@ -34,32 +50,26 @@ export const MAP_ZOOM_OFFER = 13;
 
 export const Cities: City[] = [
   {
-    id: 'paris',
     location: { latitude: 48.85661, longitude: 2.351499, zoom: 10},
     name: 'Paris',
   },
   {
-    id: 'cologne',
     location: { latitude: 50.938361, longitude: 6.959974, zoom: 10},
     name: 'Cologne',
   },
   {
-    id: 'brussels',
     location: { latitude: 50.846557, longitude: 4.351697, zoom: 10},
     name: 'Brussels',
   },
   {
-    id: 'amsterdam',
     location: { latitude: 52.374, longitude: 4.88969, zoom: 10},
     name: 'Amsterdam',
   },
   {
-    id: 'hamburg',
     location: { latitude: 53.550341, longitude: 10.000654, zoom: 10},
     name: 'Hamburg',
   },
   {
-    id: 'dusseldorf',
     location: { latitude: 51.225402, longitude: 6.776314, zoom: 10},
     name: 'Dusseldorf',
   },
