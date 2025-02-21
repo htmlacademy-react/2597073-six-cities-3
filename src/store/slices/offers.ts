@@ -7,7 +7,7 @@ import {CityName} from '../../component/Types/types.ts';
 const initialState: TOffersState = {
   city: Cities[0].name,
   offers: [],
-  status: '',
+  status: null,
 };
 
 export enum fetchOffersStatus {

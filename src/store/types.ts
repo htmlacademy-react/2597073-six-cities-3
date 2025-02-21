@@ -8,7 +8,7 @@ import {TReview} from '../component/Reviews-item/types.ts';
 export type TOffersState = {
   city: CityName;
   offers: TOffer[];
-  status: string;
+  status: fetchOffersStatus | null;
 }
 
 export type TOfferState = {
