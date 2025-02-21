@@ -1,5 +1,5 @@
 import {ChangeEventHandler, FormEvent, useCallback, useEffect, useState} from 'react';
-import CommentFormStars from '../CommentFormStars/CommentFormStars.tsx';
+import CommentFormStars from '../Comment-form-stars/CommentFormStars.tsx';
 import {PostReviewStatus} from '../../store/types.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {selectPostCommentStatus} from '../../store/selectors/commentsSelector.ts';

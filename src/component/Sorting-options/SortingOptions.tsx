@@ -43,5 +43,4 @@ const SortingOptions = ({optionsForm, setOptionsForm}: TSortOptionsProps) => {
   );
 };
 
-const memoSorting = memo(SortingOptions);
-export default memoSorting;
+export default memo(SortingOptions);

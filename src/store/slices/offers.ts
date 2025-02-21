@@ -1,8 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TOffersState} from '../types.ts';
 import {Cities} from '../../consts.ts';
-import {CityName} from '../../mocks/city.ts';
 import {fetchAllOffers} from '../thunk/offers.ts';
+import {CityName} from '../../component/Types/types.ts';
 
 const initialState: TOffersState = {
   city: Cities[0].name,
@@ -10,11 +10,11 @@ const initialState: TOffersState = {
   status: '',
 };
 
-export const fetchOffersStatus = {
-  Loading: 'Loading...',
-  Done: 'Done.',
-  Error: 'Error.',
-};
+export enum fetchOffersStatus {
+  Loading = 'Loading...',
+  Done = 'Done.',
+  Error = 'Error.',
+}
 
 const offersSlice = createSlice({
   initialState,

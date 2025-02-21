@@ -28,5 +28,4 @@ const CitiesList = () => {
   );
 };
 
-const memoCities = memo(CitiesList);
-export default memoCities;
+export default memo(CitiesList);

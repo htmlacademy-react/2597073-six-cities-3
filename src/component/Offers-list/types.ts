@@ -1,5 +1,4 @@
-import {TOffer} from '../../mocks/offer.ts';
-import {CityName} from '../../mocks/city.ts';
+import {CityName, TOffer} from '../Types/types.ts';
 
 export type TSortOptions = {
   formToggle: boolean;

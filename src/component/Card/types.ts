@@ -1,4 +1,5 @@
-import {TOffer} from '../../mocks/offer.ts';
+import {TFavoriteOffer} from '../../store/types.ts';
+import {TOffer} from '../Types/types.ts';
 
 type TOfferType = 'cities' | 'favorites';
 
@@ -8,11 +9,11 @@ type TOfferData<T extends TOfferType = TOfferType> = Record<TOfferType, {width: 
 
 export const offerData: TOfferData = {
   cities: { width: 250, height: 192, className: ''},
-  favorites: { width: 260, height: 200, className: 'favorites__card-info'},
+  favorites: { width: 150, height: 110, className: 'favorites__card-info'},
 };
 
 export type TOfferCardProps = {
-  offer: TOffer;
+  offer: TOffer | TFavoriteOffer;
   type: TOfferType;
   handleHover?: (offerId?: TOffer['id']) => void;
 }

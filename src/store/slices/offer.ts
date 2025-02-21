@@ -2,12 +2,12 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TOfferState} from '../types.ts';
 import {fetchNearbyOffers, fetchOffer} from '../thunk/offers.ts';
 import {fetchOffersStatus} from './offers.ts';
-import {TOffer} from '../../mocks/offer.ts';
+import {TOffer} from '../../component/Types/types.ts';
 
 const initialState: TOfferState = {
   offer: null,
   nearby: [],
-  status: '',
+  status: null,
 };
 
 const offerSlice = createSlice({

@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AxiosInstance} from 'axios';
-import {TReview} from '../../mocks/reviews.ts';
+import {TReview} from '../../component/Reviews-item/types.ts';
 
 export const fetchAllComments = createAsyncThunk<TReview[], string, {extra: AxiosInstance}>
 ('getAllComments', async (offerId,{ extra: api }) => {

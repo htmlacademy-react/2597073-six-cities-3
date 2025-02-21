@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {TFullOffer, TOffer} from '../../mocks/offer.ts';
 import {AxiosInstance} from 'axios';
+import {TFullOffer, TOffer} from '../../component/Types/types.ts';
 
 export const fetchAllOffers = createAsyncThunk<TOffer[], undefined, {extra: AxiosInstance}>
 ('getOffers', async (_,{extra: api}) => {

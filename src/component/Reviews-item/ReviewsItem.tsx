@@ -1,5 +1,5 @@
-import {TReview} from '../../mocks/reviews.ts';
 import {ratingCalculate} from '../../utils.ts';
+import {TReview} from './types.ts';
 
 type ReviewProps = {
   review: TReview;
