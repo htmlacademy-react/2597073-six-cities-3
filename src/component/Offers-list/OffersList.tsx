@@ -1,9 +1,8 @@
 import {useState, JSX, FC, useCallback} from 'react';
 import Card from '../Card/Card.tsx';
-import {TOffer} from '../../mocks/offer.ts';
 import Map from '../Map/Map.tsx';
 import {Cities, MAP_ZOOM_MAIN} from '../../consts.ts';
-import SortingOptions from '../SortingOptions/SortingOptions.tsx';
+import SortingOptions from '../Sorting-options/SortingOptions.tsx';
 import {OfferListProps, TSortOptions} from './types.ts';
 import {sortingOffers} from './utils.ts';
 import Loader from '../Loader/Loader.tsx';
@@ -11,6 +10,8 @@ import {Nullable} from 'vitest';
 import {useAppSelector} from '../../hooks/store.ts';
 import {fetchOffersStatus} from '../../store/slices/offers.ts';
 import {selectMemoStatus} from '../../store/selectors/offersSelectors.ts';
+import EmptyMain from '../Empty-main/EmptyMain.tsx';
+import {TOffer} from '../Types/types.ts';
 
 const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentCity}): JSX.Element => {
   const [offerIsActive, setOfferIsActive] = useState<Nullable<TOffer['id']>>(null);
@@ -36,7 +37,9 @@ const OffersList: FC<OfferListProps> = ({currentOffers,amountPlacesRent,currentC
         <b className="places__found">{amountPlacesRent} place{amountPlacesRent > 1 && 's'} to stay in {currentCity}</b>
         <SortingOptions optionsForm={optionsForm} setOptionsForm={setOptionsForm}/>
         <div className="cities__places-list places__list tabs__content">
-          {sortOffers.map((offer) => <Card type="cities" handleHover={handleHover} offer={offer} key={offer.id} />)}
+          {sortOffers.length > 0
+            ? sortOffers.map((offer) => <Card type="cities" handleHover={handleHover} offer={offer} key={offer.id} />)
+            : <EmptyMain city={currentCity}/>}
         </div>
       </section>
       <div className="cities__right-section">

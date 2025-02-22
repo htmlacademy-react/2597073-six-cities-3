@@ -1,6 +1,6 @@
 import Card from '../Card/Card.tsx';
-import {TOffer} from '../../mocks/offer.ts';
 import {memo} from 'react';
+import {TOffer} from '../Types/types.ts';
 
 const OffersNearby = ({nearOffers}: {nearOffers: TOffer[]}) => (
   nearOffers.map((offer) => (
@@ -8,5 +8,4 @@ const OffersNearby = ({nearOffers}: {nearOffers: TOffer[]}) => (
   ))
 );
 
-const MemoizedOffersNearby = memo(OffersNearby);
-export default MemoizedOffersNearby;
+export default memo(OffersNearby);

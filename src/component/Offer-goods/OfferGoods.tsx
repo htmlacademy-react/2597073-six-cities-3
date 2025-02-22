@@ -1,5 +1,5 @@
-import {TFullOffer} from '../../mocks/offer.ts';
 import {memo} from 'react';
+import {TFullOffer} from '../Types/types.ts';
 
 type TOfferGoods = {
   goods: TFullOffer['goods'];
@@ -13,5 +13,5 @@ const OfferGoods = ({goods}: TOfferGoods) => (
   ))
 );
 
-const memoGoods = memo(OfferGoods);
-export default memoGoods;
+export default memo(OfferGoods);
+

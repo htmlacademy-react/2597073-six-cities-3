@@ -1,25 +1,25 @@
 import {JSX, useEffect, useMemo} from 'react';
 import {useParams} from 'react-router-dom';
 import NotFound from '../not-found-page/NotFound.tsx';
-import {getNearOffers} from './utils.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchNearbyOffers, fetchOffer} from '../../store/thunk/offers.ts';
 import {fetchOffersStatus} from '../../store/slices/offers.ts';
 import Loader from '../../component/Loader/Loader.tsx';
 import {
-  selectNearbyOffers, selectOffer,
-  selectOfferStatus
+  selectMemoNearbyOffers,
+  selectMemoOffer, selectMemoOfferStatus,
 } from '../../store/selectors/offerSelector.ts';
 import {fetchAllComments} from '../../store/thunk/comments.ts';
 import OffersNearby from '../../component/Offers-nearby/OffersNearby.tsx';
 import OfferInfo from '../../component/Offer-info/OfferInfo.tsx';
+import {MAX_COUNT_NEARBY_OFFERS} from '../../consts.ts';
 
 
 function Offer(): JSX.Element {
   const dispatch = useAppDispatch();
-  const loadingOfferStatus = useAppSelector(selectOfferStatus);
-  const currentOffer = useAppSelector(selectOffer);
-  const nearbyOffers = useAppSelector(selectNearbyOffers);
+  const loadingOfferStatus = useAppSelector(selectMemoOfferStatus);
+  const currentOffer = useAppSelector(selectMemoOffer);
+  const nearbyOffers = useAppSelector(selectMemoNearbyOffers);
 
   const id = String(useParams().id);
 
@@ -29,7 +29,7 @@ function Offer(): JSX.Element {
     dispatch(fetchAllComments(id));
   },[dispatch, id]);
 
-  const nearOffers = useMemo(() => getNearOffers(currentOffer, nearbyOffers), [currentOffer, nearbyOffers]);
+  const nearOffers = useMemo(() => nearbyOffers.slice(0, MAX_COUNT_NEARBY_OFFERS), [nearbyOffers]);
 
   if (loadingOfferStatus === fetchOffersStatus.Loading) {
     return <Loader />;
@@ -39,15 +39,12 @@ function Offer(): JSX.Element {
     return <NotFound/>;
   }
 
-
-  const nearAndCurrentOffers = [...nearbyOffers, currentOffer];
-
   return (
     <div className="page">
       <main className="page__main page__main--offer">
         <OfferInfo
           currentOffer={currentOffer}
-          nearAndCurrentOffers={nearAndCurrentOffers}
+          nearOffers={nearOffers}
           offerId={id}
         />
         <div className="container">

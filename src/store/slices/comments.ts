@@ -1,25 +1,26 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {PostReviewStatus, TCommentsState} from '../types.ts';
 import {fetchOffersStatus} from './offers.ts';
 import {fetchAllComments, postComment} from '../thunk/comments.ts';
-import {TReview} from '../../mocks/reviews.ts';
 
 const initialState: TCommentsState = {
   comments: [],
-  status: '',
+  status: null,
   reviewPostStatus: PostReviewStatus.Idle
 };
 
 const commentSlice = createSlice({
   initialState,
   name: 'comments',
-  reducers: {},
+  reducers: {
+    clear: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllComments.pending, (state) => {
         state.status = fetchOffersStatus.Loading;
       })
-      .addCase(fetchAllComments.fulfilled, (state, action: PayloadAction<TReview[]>) => {
+      .addCase(fetchAllComments.fulfilled, (state, action) => {
         state.comments = action.payload;
         state.status = fetchOffersStatus.Done;
       })

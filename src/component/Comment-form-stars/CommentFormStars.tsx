@@ -33,5 +33,4 @@ const CommentFormStars = ({rating, getCommentHandler}: TCommentFormStarsProps) =
   </div>
 );
 
-const memoStars = memo(CommentFormStars);
-export default memoStars;
+export default memo(CommentFormStars);

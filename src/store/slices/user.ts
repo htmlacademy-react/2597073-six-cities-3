@@ -29,7 +29,9 @@ const failedLogin = (state: TUserState) => {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    clear: () => initialState,
+  },
   extraReducers: (builder) => {
     builder
       .addCase(checkAuth.pending, (state) => {
@@ -39,13 +41,7 @@ const userSlice = createSlice({
       .addCase(checkAuth.rejected, failedLogin)
       .addCase(login.fulfilled, successLogin)
       .addCase(login.rejected, failedLogin)
-      .addCase(logout.fulfilled, (state) => {
-        Object.assign(
-          {...initialState},
-          state.authorizationStatus = AuthorizationStatus.NoAuth,
-          state.isAuthLoading = false
-        );
-      });
+      .addCase(logout.fulfilled, failedLogin);
   }
 });
 

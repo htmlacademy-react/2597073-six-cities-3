@@ -3,7 +3,7 @@ import Main from '../../pages/main-page/Main.tsx';
 import NotFound from '../../pages/not-found-page/NotFound.tsx';
 import Favorites from '../../pages/favorites-page/Favorites.tsx';
 import Offer from '../../pages/offer-page/Offer.tsx';
-import PrivateRoutes from '../PrivateRoutes/PrivateRoutes.tsx';
+import PrivateRoutes from '../Private-routes/PrivateRoutes.tsx';
 import { RoutesEndpoints } from './const.ts';
 import Login from '../../pages/login-page/Login.tsx';
 import {getToken} from '../../axios/token.ts';

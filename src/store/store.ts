@@ -4,6 +4,7 @@ import {createApi} from '../axios/api.ts';
 import {userSlice} from './slices/user.ts';
 import {offerSlice} from './slices/offer.ts';
 import {commentSlice} from './slices/comments.ts';
+import {favoritesSlice} from './slices/favorites.ts';
 
 export const api = createApi();
 
@@ -13,6 +14,7 @@ export const store = configureStore({
     user: userSlice.reducer,
     offer: offerSlice.reducer,
     comments: commentSlice.reducer,
+    favorites: favoritesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

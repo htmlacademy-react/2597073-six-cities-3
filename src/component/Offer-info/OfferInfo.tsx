@@ -1,25 +1,28 @@
 import OfferImages from '../Offer-images/OfferImages.tsx';
 import OfferGoods from '../Offer-goods/OfferGoods.tsx';
 import ReviewsList from '../Review-list/ReviewsList.tsx';
-import CommentForm from '../CommentForm/CommentForm.tsx';
+import CommentForm from '../Comment-form/CommentForm.tsx';
 import Map from '../Map/Map.tsx';
 import {MAP_ZOOM_OFFER} from '../../consts.ts';
-import {TFullOffer, TOffer} from '../../mocks/offer.ts';
 import {ratingCalculate} from '../../utils.ts';
 import {addPluralS} from '../../pages/offer-page/utils.ts';
 import {useAuth} from '../../hooks/store.ts';
 import OfferHostInfo from '../Offer-host/OfferHost.tsx';
 import {memo} from 'react';
+import ToggleFavoriteButton from '../Toggle-favorite-button/ToggleFavoriteButton.tsx';
+import {TFullOffer, TOffer} from '../Types/types.ts';
 
 type TOfferInfo = {
   currentOffer: TFullOffer;
   offerId: string;
-  nearAndCurrentOffers: TOffer[];
+  nearOffers: TOffer[];
 }
 
-const OfferInfo = ({currentOffer,offerId,nearAndCurrentOffers}: TOfferInfo) => {
-  const isAuth = useAuth();
+const OfferInfo = ({currentOffer,offerId,nearOffers}: TOfferInfo) => {
   const {id, images, description, isFavorite, city, isPremium, title, rating, type, goods, maxAdults, bedrooms, price, host} = currentOffer;
+
+  const nearAndCurrentOffers = [...nearOffers, currentOffer];
+  const isAuth = useAuth();
 
   const currentCountBedRooms = addPluralS('Bedroom', 'Bedrooms', bedrooms);
   const currentMaxAdults = `Max ${addPluralS('adult', 'adults', maxAdults)}`;
@@ -44,12 +47,14 @@ const OfferInfo = ({currentOffer,offerId,nearAndCurrentOffers}: TOfferInfo) => {
             <h1 className="offer__name">
               {title}
             </h1>
-            <button className={`offer__bookmark-button ${isFavorite && 'offer__bookmark-button--active'} button`} type="button">
-              <svg className="offer__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <ToggleFavoriteButton
+              id={id}
+              isFavorite={isFavorite}
+              className="offer"
+              width="31"
+              height="33"
+              isAuth={isAuth}
+            />
           </div>
           <div className="offer__rating rating">
             <div className="offer__stars rating__stars">
@@ -85,11 +90,8 @@ const OfferInfo = ({currentOffer,offerId,nearAndCurrentOffers}: TOfferInfo) => {
           />
           <section className="offer__reviews reviews">
             <ReviewsList/>
-            {isAuth ? (
-              <CommentForm
-                offerId={offerId}
-              />
-            ) : <div style={{marginLeft: '40%'}}>Вы не авторизованы!</div>}
+            {isAuth && <CommentForm offerId={offerId}/>}
+            {!isAuth && <div style={{marginLeft: '37%'}}>Вы не авторизованы!</div>}
           </section>
         </div>
       </div>
@@ -105,6 +107,5 @@ const OfferInfo = ({currentOffer,offerId,nearAndCurrentOffers}: TOfferInfo) => {
   );
 };
 
-const memoOfferInfo = memo(OfferInfo);
-export default memoOfferInfo;
+export default memo(OfferInfo);
 

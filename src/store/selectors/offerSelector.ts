@@ -8,4 +8,3 @@ export const selectOfferStatus = (state: RootState) => state.offer.status;
 export const selectMemoNearbyOffers = createSelector([selectNearbyOffers], (nearby) => nearby);
 export const selectMemoOffer = createSelector([selectOffer], (offer) => offer);
 export const selectMemoOfferStatus = createSelector([selectOfferStatus], (status) => status);
-

@@ -1,26 +1,35 @@
 import {store} from './store.ts';
-import {CityName} from '../mocks/city.ts';
-import {TFullOffer, TOffer} from '../mocks/offer.ts';
 import {AuthorizationStatus} from '../consts.ts';
 import {Nullable} from 'vitest';
-import {TReview} from '../mocks/reviews.ts';
+import {fetchOffersStatus} from './slices/offers.ts';
+import {CityName, TFullOffer, TOffer} from '../component/Types/types.ts';
+import {TReview} from '../component/Reviews-item/types.ts';
 
 export type TOffersState = {
   city: CityName;
   offers: TOffer[];
-  status: string;
+  status: fetchOffersStatus | null;
 }
 
 export type TOfferState = {
   offer: TFullOffer | null;
   nearby: TOffer[];
-  status: string;
+  status: fetchOffersStatus | null;
+}
+
+export type TFavoriteOffer = Omit<TOffer, 'maxAdults' | 'bedrooms'>
+
+
+export type TFavoritesState = {
+  favoritesOffers: TFavoriteOffer[];
+  status: fetchOffersStatus | null;
+  updatingStatus: boolean | null;
 }
 
 export type TCommentsState = {
   comments: TReview[];
-  status: string;
-  reviewPostStatus: typeof PostReviewStatus[keyof typeof PostReviewStatus];
+  status: fetchOffersStatus | null;
+  reviewPostStatus: PostReviewStatus;
 }
 
 export enum PostReviewStatus {
@@ -31,7 +40,7 @@ export enum PostReviewStatus {
 }
 
 export type TUserState = {
-  authorizationStatus: typeof AuthorizationStatus[keyof typeof AuthorizationStatus];
+  authorizationStatus: AuthorizationStatus | null;
   AuthInfo: TUser;
   isAuthLoading: boolean | null;
 };

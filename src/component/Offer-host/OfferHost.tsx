@@ -1,4 +1,4 @@
-import {OfferHost} from '../../mocks/offer.ts';
+import {OfferHost} from '../Types/types.ts';
 
 type TOfferHostProps = {
   host: OfferHost;

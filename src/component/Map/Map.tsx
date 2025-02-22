@@ -3,9 +3,8 @@ import {Marker, layerGroup} from 'leaflet';
 import {currentCustomIcon, defaultCustomIcon} from '../../consts.ts';
 import useMap from '../../hooks/use-map.tsx';
 import 'leaflet/dist/leaflet.css';
-import {TOffer} from '../../mocks/offer.ts';
 import {Nullable} from 'vitest';
-import {City} from '../Types/types.ts';
+import {City, TOffer} from '../Types/types.ts';
 
 type MapProps = {
   city: City;
@@ -47,5 +46,4 @@ const Map = (props: MapProps) => {
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 };
 
-const memoMap = memo(Map);
-export default memoMap;
+export default memo(Map);
