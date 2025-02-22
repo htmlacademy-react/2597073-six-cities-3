@@ -1,4 +1,4 @@
-import React, {JSX} from 'react';
+import React, {JSX, memo} from 'react';
 import { Link } from 'react-router-dom';
 import {offerData, TOfferCardProps} from './types.ts';
 import {ratingCalculate} from '../../utils.ts';
@@ -7,7 +7,7 @@ function Card({offer, type, handleHover}: TOfferCardProps): JSX.Element {
   const {width, height, className} = offerData[type];
 
   const handleMouseEnter = () => {
-    handleHover?.(offer);
+    handleHover?.(offer['id']);
   };
 
   const handleMouseLeave = () => {
@@ -70,4 +70,5 @@ function Card({offer, type, handleHover}: TOfferCardProps): JSX.Element {
   );
 }
 
-export default Card;
+const memoCard = memo(Card);
+export default memoCard;

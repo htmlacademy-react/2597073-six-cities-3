@@ -5,14 +5,16 @@ export type CityLocation = {
   zoom: number;
 }
 
+export type OfferHost = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+};
+
 export type TFullOffer = TOffer & {
   description: string;
   goods: [string];
-  host: {
-    name: string;
-    avatarUrl: string;
-    isPro: boolean;
-  };
+  host: OfferHost;
   images: [string];
 }
 

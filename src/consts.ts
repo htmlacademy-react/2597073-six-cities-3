@@ -1,4 +1,5 @@
 import {City} from './component/Types/types.ts';
+import {Icon} from 'leaflet';
 
 export const AXIOS_BASE_URL = 'https://15.design.htmlacademy.pro/six-cities';
 export const AXIOS_TIMEOUT = 5000;
@@ -21,6 +22,18 @@ export const SORTING_OPTIONS = [
   'Price: high to low',
   'Top rated first',
 ];
+
+export const defaultCustomIcon = new Icon({
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+export const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
 
 export const StarsData: Array<{title: string; value: number}> = [
   {title: 'perfect', value: 5},

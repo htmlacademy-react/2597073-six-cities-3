@@ -1,20 +1,19 @@
 import {StarsData} from '../../consts.ts';
-import {ChangeEventHandler, Fragment} from 'react';
-import {ReviewData} from '../CommentForm/CommentForm.tsx';
+import {ChangeEventHandler, Fragment, memo} from 'react';
 
 type TCommentFormStarsProps = {
-  commentData: ReviewData;
+  rating: number;
   getCommentHandler: (type: 'rating' | 'comment') => ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
 }
 
-const CommentFormStars = ({commentData, getCommentHandler}: TCommentFormStarsProps) => (
+const CommentFormStars = ({rating, getCommentHandler}: TCommentFormStarsProps) => (
   <div className="reviews__rating-form form__rating">
     {StarsData.map(({value, title}) => (
       <Fragment key={value}>
         <input
           className="form__rating-input visually-hidden"
           name="rating"
-          checked={commentData.rating === value}
+          checked={rating === value}
           value={value}
           id={`${value}-stars`}
           type="radio"
@@ -34,4 +33,5 @@ const CommentFormStars = ({commentData, getCommentHandler}: TCommentFormStarsPro
   </div>
 );
 
-export default CommentFormStars;
+const memoStars = memo(CommentFormStars);
+export default memoStars;
