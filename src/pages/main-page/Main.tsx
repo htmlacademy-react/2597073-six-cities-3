@@ -3,7 +3,6 @@ import OffersList from '../../component/Offers-list/OffersList.tsx';
 import CitiesList from '../../component/Cities-list/CitiesList.tsx';
 import {useAppDispatch, useAppSelector} from '../../hooks/store.ts';
 import {fetchAllOffers} from '../../store/thunk/offers.ts';
-import Header from '../../component/Header/Header.tsx';
 
 function Main(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -18,8 +17,6 @@ function Main(): JSX.Element {
 
   return (
     <div className="page page--gray page--main">
-      <Header/>
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">

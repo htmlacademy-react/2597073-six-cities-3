@@ -1,4 +1,5 @@
 import {TReview} from '../../mocks/reviews.ts';
+import {ratingCalculate} from '../../utils.ts';
 
 type ReviewProps = {
   review: TReview;
@@ -20,7 +21,7 @@ const ReviewsList = ({review}: ReviewProps) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: '80%'}}></span>
+            <span style={{width: `${ratingCalculate(review.rating)}`}}></span>
             <span className="visually-hidden">{review.rating}</span>
           </div>
         </div>
